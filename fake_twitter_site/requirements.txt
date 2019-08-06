@@ -1,0 +1,8 @@
+
+Django==2.1
+flask
+redis
+psycopg2==2.7.5
+mysqlclient
+mysql
+Pillow
