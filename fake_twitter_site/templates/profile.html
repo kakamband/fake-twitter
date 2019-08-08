@@ -1,0 +1,57 @@
+{% extends 'templates/base.html' %}
+
+{% block main %}
+<div class="row">
+    <!--フィード-->
+    <div class="col-9">
+        <h3>@{{ user.username }}</h3>
+        {% if user.tweets.all %}
+            <!--過去にツイートがあるか確認する-->
+            <!--ツイートがないならユーザーに知らせる-->
+            {% for tweet in user.tweets.all %}
+                <div class="card" style="margin-bottom: 20px;">
+                    <div class="card-body">
+                        <!--ツイートの本文をユーザー名と一緒に表示する-->
+                        <h5 class="card-title">@{{ tweet.user.username }}</h5>
+                        <p class="card-text"><b>{{ tweet.created_at }}</b>-{{ tweet.body }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+                <p>ツイートしてみましょう!</p>
+        {% endif %}
+    </div>
+    <!--サイドバー-->
+    <div class="col-3">
+        <h4>ツイートする</h4>
+        {% if form.errors %}
+	        {% for field in form %}
+        		{% for error in form.errors %}
+        			<div class="alert alert-danger">
+        				<b>{{ error|escape }}</b>
+        			</div>
+        		{% endfor %}
+	        {% endfor %}
+        	{% for error in form.non_field_errors %}
+        		<div class="alert alert-danger">
+        			<b>{{ error|escape }}</b>
+        		</div>
+        	{% endfor %}
+        {% endif %}
+
+        <form action="/{{ request.user.username }}/" method="post">
+	        {% csrf_token %}
+
+	        {% for field in form %}
+	        	<div class="form-group">
+	        		{{ field }}
+	        	</div>
+	        {% endfor %}
+
+        	<input type="hidden" value="{{ request.path }}" name="redirect">
+	        <input type="submit" value="Post tweet" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
