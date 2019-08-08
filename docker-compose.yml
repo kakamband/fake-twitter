@@ -16,11 +16,11 @@ services :
   #カレントディレクトリ中にあるDockerfileを参照してビルドする
     build : ./fake_twitter_site
     ports :                 # 公開ポート
-      - "8020:8020"             # 外部公開ポート番号：コンテナのポート番号（存在していないと接続できない）
+      - "8030:8030"             # 外部公開ポート番号：コンテナのポート番号（存在していないと接続できない）
       # bashを打っておけばとりあえず動かしたままにできる
       # 再現性を意識して実行するcommandを記述すること
-    command : bash -c "pip install -r fake_twitter_site/requirements.txt && python fake_twitter_site/manage.py migrate && python fake_twitter_site/manage.py runserver 0.0.0.0:8020"
-    #command : bash -c "pip install -r fake_twitter_site/requirements.txt && python fake_twitter_site/manage.py migrate && python fake_twitter_site/manage.py createsuperuser && python fake_twitter_site/manage.py runserver 0.0.0.0:8020"
+    command : bash -c "sleep 5 && pip install -r fake_twitter_site/requirements.txt && python fake_twitter_site/manage.py makemigrations && python fake_twitter_site/manage.py migrate && python fake_twitter_site/manage.py runserver 0.0.0.0:8030"
+    #command : bash -c "pip install -r fake_twitter_site/requirements.txt && python fake_twitter_site/manage.py migrate && python fake_twitter_site/manage.py createsuperuser && python fake_twitter_site/manage.py runserver 0.0.0.0:8030"
     #command : bash
     volumes : 
       - ".:/usr/src/app"
