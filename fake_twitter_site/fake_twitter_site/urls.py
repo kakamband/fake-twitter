@@ -1,8 +1,7 @@
 from django.urls import path
 from django.contrib import admin
 from tweet.views import feed
-from fake_twitter_profile.views import frontpage, signout, profile, follows, followers, follow, stopfollow, signin
-from tweet.views import fav
+from fake_twitter_profile.views import frontpage, signout, profile, follows, followers, follow, stopfollow, signin, fav
 
 urlpatterns = [
     #path('admin/',admin.site.urls)

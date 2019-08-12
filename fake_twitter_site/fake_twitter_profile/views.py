@@ -9,6 +9,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .models import FakeTwitterProfile
+from tweet.models import Tweet, Fav
 
 
 # profileを表示する
@@ -117,4 +118,23 @@ def stopfollow(request, username):
 
 
 
+@login_required
+def fav(request, tweet_id):
+    tweet = Tweet.objects.get(id=tweet_id)
+    is_fav = Fav.objects.filter(fav_user_id=request.user.id).filter(favtweet=tweet).count()
 
+    favs = models.ManyToManyField('self', related_name='fav_number', symmetrical=False)
+
+    # unfav
+    if is_fav > 0:
+        fav_num = Fav.objects.create(fav_user_id=request.user.id, favtweet=tweet,related='fav_number')
+        tweet.fav_num -= 1
+        tweet.save()
+
+    # fav
+    else :
+        fav_num = Fav.objects.create(fav_user_id=request.user.id, favtweet=tweet,related='fav_number')
+        tweet.fav_num += 1
+        tweet.save()
+    
+    return redirect('/'+user.username+'/')
