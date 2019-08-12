@@ -133,6 +133,8 @@ LOGIN_URL = '/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-LOGIN_URL = 'login' # ログインしていないときのリダイレクト先
-LOGIN_REDIRECT_URL ='index' # ログイン後のリダイレクト先
-LOGOUT_REDIRECT_URL = 'top' # ログアウト後のリダイレクト先
+#LOGIN_URL = 'login' # ログインしていないときのリダイレクト先
+#LOGIN_REDIRECT_URL ='index' # ログイン後のリダイレクト先
+#LOGOUT_REDIRECT_URL = 'top' # ログアウト後のリダイレクト先
+
+APPEND_SLASH=False 
