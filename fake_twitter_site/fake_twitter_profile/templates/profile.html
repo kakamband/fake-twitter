@@ -63,7 +63,7 @@
         <form action="/{{ request.user.username }}/" method="post">
 	        {% csrf_token %}
 
-	        {% for field in  %}
+	        {% for field in fields %}
 	        	<div class="form-group">
 	        		{{ field }}
 	        	</div>
