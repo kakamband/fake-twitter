@@ -30,10 +30,8 @@
                             </p>
                             <!--いいねボタンを表示する-->
                         <hr>
-                            <a href="/{{ user.username }}/fav/"  class="btn btn-danger">いいね</a>
-                            <a href="/{{ user.username }}/"></a> {{ user.tweet.favs.count }}
-
-
+                            <a href="/{{ tweet.id }}/fav/"  class="btn btn-danger">いいね</a>
+                            <a href="/{{ user.username }}/fav/"></a> {{ tweet.fav_num }}
                     </div>
                 </div>
             {% endfor %}
@@ -65,7 +63,7 @@
         <form action="/{{ request.user.username }}/" method="post">
 	        {% csrf_token %}
 
-	        {% for field in form %}
+	        {% for field in  %}
 	        	<div class="form-group">
 	        		{{ field }}
 	        	</div>

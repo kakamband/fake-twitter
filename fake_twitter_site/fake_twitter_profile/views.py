@@ -90,7 +90,7 @@ def follows(request, username):
     user = User.objects.get(username=username)
     fake_tweeter_profiles = user.fake_twitter_profile.follows.select_related('user').all()
 
-    return render(request, 'users.html', {'title':'Followers','fake_tweeter_profiles':fake_tweeter_profiles})
+    return render(request, 'users.html', {'title':'Follows','fake_tweeter_profiles':fake_tweeter_profiles})
 
 def followers(request, username):
     user = User.objects.get(username=username)
@@ -122,19 +122,24 @@ def stopfollow(request, username):
 def fav(request, tweet_id):
     tweet = Tweet.objects.get(id=tweet_id)
     is_fav = Fav.objects.filter(fav_user_id=request.user.id).filter(favtweet=tweet).count()
-
-    favs = models.ManyToManyField('self', related_name='fav_number', symmetrical=False)
+    #fav_num = Fav.objects.create(fav_user_id=request.user.id, favtweet=tweet,related='fav_number')
+    #favs = models.ManyToManyField('self', related_name='fav_number', symmetrical=False)
 
     # unfav
-    if is_fav > 0:
-        fav_num = Fav.objects.create(fav_user_id=request.user.id, favtweet=tweet,related='fav_number')
+    if is_fav >0:
+        print(333)
+        Fav.objects.get(favtweet=tweet,fav_user_id=request.user.id).delete()
+        # fav_num = Fav.objects.create(fav_user_id=request.user.id, favtweet=tweet,related='fav_number')
         tweet.fav_num -= 1
         tweet.save()
 
     # fav
     else :
-        fav_num = Fav.objects.create(fav_user_id=request.user.id, favtweet=tweet,related='fav_number')
+        print(334)
+        #import pdb;pdb.set_trace()
+        Fav.objects.create(favtweet=tweet,fav_user=request.user)
+        # fav_num = Fav.objects.create(fav_user_id=request.user.id, favtweet=tweet,related='fav_number')
         tweet.fav_num += 1
         tweet.save()
     
-    return redirect('/'+user.username+'/')
+    return redirect('/'+request.user.username+'/')

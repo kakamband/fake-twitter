@@ -9,7 +9,7 @@
       <div class="card" style="margin-bottom: 20px;">
         <div class="card-body">
           <h5 class="card-title"><a href="/{{ tweet.user.username }}/">@{{ tweet.user.username }}</a></h5>
-          <p class="card-text"><b>{{ tweet.created_at }}</b> - {{ tweet.body }}</p>
+          <p class="card-text"><b>{{ tweet.body }}</b> --- {{ tweet.created_at }}</p>
         </div>
       </div>
     {% endfor %}
