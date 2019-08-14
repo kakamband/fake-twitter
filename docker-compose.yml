@@ -31,3 +31,5 @@ services :
     links:
       - db:db
     tty: true
+    stdin_open: true
+  
