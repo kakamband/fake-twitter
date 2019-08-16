@@ -23,7 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f0*yr3*#4x)+2!bt%-o&dmb*n4cfjvcl+v-48srmn#!$x-43o!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.environ.get('heroku'):
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0']
 
@@ -89,7 +92,12 @@ if DEBUG:
     DATABASES['default']['HOST']='db'
     DATABASES['default']['NAME']='DB1'
     DATABASES['default']['PASSWORD']='qwerty'
-
+else:
+    # ここは書き換える必要があるかもしれない
+    DATABASES['default']['ENGINE']='cleardb'
+    DATABASES['default']['HOST']='us-cdbr-iron-east-02.cleardb.net'
+    DATABASES['default']['NAME']='heroku_f45b4ab3adad2cc'
+    pass
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -138,3 +146,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #LOGOUT_REDIRECT_URL = 'top' # ログアウト後のリダイレクト先
 
 APPEND_SLASH=False 
+
+
+

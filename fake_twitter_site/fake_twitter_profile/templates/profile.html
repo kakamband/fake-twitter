@@ -62,13 +62,12 @@
         <!--ツイートするための指定-->
         <form action="/{{ request.user.username }}/" method="post">
 	        {% csrf_token %}
-
-	        {% for field in fields %}
+            {% for field in form%}
 	        	<div class="form-group">
 	        		{{ field }}
 	        	</div>
 	        {% endfor %}
-
+            
         	<input type="hidden" value="{{ request.path }}" name="redirect">
 	        <input type="submit" value="Post tweet" class="btn btn-primary">
         </form>

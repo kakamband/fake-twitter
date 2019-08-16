@@ -11,6 +11,7 @@ RUN mkdir -p /usr/src/app
 ENV HOME=/usr/src/app
 WORKDIR $HOME
 
-ADD requirements.txt $HOME
+ADD . $HOME
 RUN pip install -r requirements.txt
+CMD python manage.py runserver 0.0.0.0:$PORT
                                              
