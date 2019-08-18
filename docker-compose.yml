@@ -3,13 +3,19 @@ services :
 
 
   db:
-    image : "mysql:5.6"
+    #image : "mysql:5.6"
+    build: ./db
     restart : always
+    #environment :
+    #   MYSQL_DATABASE: DB1
+    #   MYSQL_ROOT_PASSWORD: qwerty
     environment :
-      MYSQL_DATABASE: DB1
-      MYSQL_ROOT_PASSWORD: qwerty
+      POSTGRES_USER : root
+      POSTGRES_DB : db
+      POSTGRES_PASSWORD : qwerty
     expose:
-      - "3306"
+      #- "3306"
+      - "5432"
     
   7th_container :
   

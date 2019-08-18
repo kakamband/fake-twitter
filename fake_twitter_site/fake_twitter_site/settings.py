@@ -28,7 +28,7 @@ if os.environ.get('heroku'):
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0','fake----twitter.herokuapp.com']
 
 
 # Application definition
@@ -82,22 +82,29 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'USER':'root',
-        'PORT':'3306',
-        'OPTIONS':{
-            'init_command':"SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+        #'PORT':'3306',
+        'PORT' : '5432'
+        # 'OPTIONS':{
+        #     'init_command':"SET sql_mode='STRICT_TRANS_TABLES'",
+        #},
     }
 }
 if DEBUG:
+    DATABASES['default']['ENGINE']='django.db.backends.postgresql'
     DATABASES['default']['HOST']='db'
-    DATABASES['default']['NAME']='DB1'
+    #DATABASES['default']['NAME']='DB1'
+    DATABASES['default']['NAME']='db'
     DATABASES['default']['PASSWORD']='qwerty'
 else:
     # ここは書き換える必要があるかもしれない
-    DATABASES['default']['ENGINE']='cleardb'
-    DATABASES['default']['HOST']='us-cdbr-iron-east-02.cleardb.net'
-    DATABASES['default']['NAME']='heroku_f45b4ab3adad2cc'
-    pass
+    DATABASES['default']['ENGINE']='django.db.backends.postgresql'
+    DATABASES['default']['USER']='hdaksjfrthuljh'
+    DATABASES['default']['PASSWORD']='2062131a1842ed662c64e749f17a76cb5641c7c65715072aa43f77d802e451ac'
+    DATABASES['default']['HOST']='ec2-54-83-36-37.compute-1.amazonaws.com'
+    DATABASES['default']['NAME']='devdqkf3ggqj0i'
+    
+
+    
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
