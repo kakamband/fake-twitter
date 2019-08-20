@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fake_twitter_profile',
     'tweet',
+    'register',
 ]
 
 MIDDLEWARE = [
@@ -82,17 +83,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'USER':'root',
-        #'PORT':'3306',
         'PORT' : '5432'
-        # 'OPTIONS':{
-        #     'init_command':"SET sql_mode='STRICT_TRANS_TABLES'",
-        #},
     }
 }
 if DEBUG:
     DATABASES['default']['ENGINE']='django.db.backends.postgresql'
     DATABASES['default']['HOST']='db'
-    #DATABASES['default']['NAME']='DB1'
     DATABASES['default']['NAME']='db'
     DATABASES['default']['PASSWORD']='qwerty'
 else:
